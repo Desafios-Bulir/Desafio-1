@@ -1,5 +1,4 @@
 import { Injectable, BadRequestException, ForbiddenException, NotFoundException } from '@nestjs/common';
-import { Service } from '@prisma/client';
 import { ServicesRepository } from './services.repository';
 import { CreateServiceDto, UpdateServiceDto } from './dto';
 
@@ -7,7 +6,7 @@ import { CreateServiceDto, UpdateServiceDto } from './dto';
 export class ServicesService {
   constructor(private servicesRepository: ServicesRepository) {}
 
-  async createService(providerId: string, createServiceDto: CreateServiceDto): Promise<Service> {
+  async createService(providerId: string, createServiceDto: CreateServiceDto) {
     if (createServiceDto.price < 0) {
       throw new BadRequestException('Preço não pode ser negativo');
     }
@@ -20,11 +19,11 @@ export class ServicesService {
     });
   }
 
-  async getAllServices(): Promise<Service[]> {
+  async getAllServices() {
     return this.servicesRepository.findAll();
   }
 
-  async getServiceById(id: string): Promise<Service> {
+  async getServiceById(id: string) {
     const service = await this.servicesRepository.findById(id);
     if (!service) {
       throw new NotFoundException('Serviço não encontrado');
@@ -32,7 +31,7 @@ export class ServicesService {
     return service;
   }
 
-  async getServicesByProviderId(providerId: string): Promise<Service[]> {
+  async getServicesByProviderId(providerId: string) {
     return this.servicesRepository.findByProviderId(providerId);
   }
 
@@ -40,7 +39,7 @@ export class ServicesService {
     serviceId: string,
     providerId: string,
     updateServiceDto: UpdateServiceDto,
-  ): Promise<Service> {
+  ) {
     const service = await this.servicesRepository.findById(serviceId);
     if (!service) {
       throw new NotFoundException('Serviço não encontrado');
@@ -61,7 +60,7 @@ export class ServicesService {
     });
   }
 
-  async deleteService(serviceId: string, providerId: string): Promise<Service> {
+  async deleteService(serviceId: string, providerId: string) {
     const service = await this.servicesRepository.findById(serviceId);
     if (!service) {
       throw new NotFoundException('Serviço não encontrado');

@@ -5,6 +5,7 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { UsersRepository } from './users.repository';
 import { PrismaModule } from '../../prisma/prisma.module';
+import { JwtStrategy } from '../../common/guards/jwt.strategy';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { PrismaModule } from '../../prisma/prisma.module';
     }),
   ],
   controllers: [UsersController],
-  providers: [UsersService, UsersRepository],
+  providers: [UsersService, UsersRepository, JwtStrategy],
   exports: [UsersService],
 })
 export class UsersModule {}
