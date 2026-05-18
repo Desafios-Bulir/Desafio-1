@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Service } from '@prisma/client';
-import { CreateServiceDto } from './dto';
-import { UpdateServiceDto } from './dto';
 
 export interface CreateServiceData {
   name: string;

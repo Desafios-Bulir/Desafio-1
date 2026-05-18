@@ -108,4 +108,15 @@ export class UsersService {
     return user;
   }
 
+  async getUserById(userId: string): Promise<User | null> {
+    return this.usersRepository.findById(userId);
+  }
+
+  async validateBalance(userId: string, amount: number): Promise<boolean> {
+    const user = await this.usersRepository.findById(userId);
+    if (!user) {
+      return false;
+    }
+    return user.balance >= amount;
+  }
 }
