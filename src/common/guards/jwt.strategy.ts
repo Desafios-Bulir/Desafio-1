@@ -13,13 +13,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: { sub: number; email: string; perfil: string }) {
-    const user = await this.prisma.usuario.findUnique({
-      where: { id_usuario: payload.sub },
+  async validate(payload: { sub: string; email: string; role: string }) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: payload.sub },
     });
-    if (!user || user.status !== 'ATIVO') {
-      throw new UnauthorizedException('Utilizador inativo ou não encontrado.');
+    if (!user) {
+      throw new UnauthorizedException('Utilizador não encontrado.');
     }
-    return { id: payload.sub, email: payload.email, perfil: payload.perfil };
+    return { id: payload.sub, email: payload.email, role: payload.role };
   }
 }
