@@ -24,14 +24,14 @@ export class CreateUserDto {
 
   @ApiProperty({
     description: 'Email do usuário - Único no sistema',
-    example: 'joao@example.com',
+    example: 'gilsonchipombo@gmail.com',
   })
   @IsEmail()
   email: string;
 
   @ApiProperty({
     description: 'Senha (mínimo 6 caracteres)',
-    example: 'senha123',
+    example: '123456',
     minLength: 6,
   })
   @IsNotEmpty()
