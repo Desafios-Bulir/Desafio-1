@@ -1,26 +1,29 @@
 import { IsNotEmpty, IsString, MinLength, IsEmail } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsValidNifFormat } from '../../../common/decorators/is-valid-nif.decorator';
 
 export class CreateProviderDto {
   @ApiProperty({
     description: 'Nome completo do prestador de serviço',
-    example: 'João Silva Santos',
+    example: 'Gilson Chipombo',
   })
   @IsNotEmpty()
   @IsString()
   fullName: string;
 
   @ApiProperty({
-    description: 'NIF (Número de Identificação Fiscal) - Obrigatório e único no sistema',
-    example: '123456789',
+    description:
+      'NIF (Número de Identificação Fiscal) - 10 dígitos numéricos começando com 5 - Único no sistema',
+    example: '5123456789',
   })
   @IsNotEmpty()
   @IsString()
+  @IsValidNifFormat()
   nif: string;
 
   @ApiProperty({
     description: 'Email do prestador - Único no sistema',
-    example: 'prestador@example.com',
+    example: 'prestador@bulir.com',
   })
   @IsEmail()
   email: string;

@@ -4,6 +4,7 @@ import * as bcrypt from 'bcryptjs';
 import { UsersRepository } from './users.repository';
 import { CreateUserDto, LoginDto, CreateClientDto, CreateProviderDto } from './dto';
 import { User } from '@prisma/client';
+import { isValidNif } from '../../common/utils/nif.validator';
 
 @Injectable()
 export class UsersService {
@@ -38,6 +39,11 @@ export class UsersService {
   }
 
   async registerProvider(createProviderDto: CreateProviderDto): Promise<{ user: User; access_token: string }> {
+    
+    if (!isValidNif(createProviderDto.nif)) {
+      throw new BadRequestException('NIF inválido: deve ter 10 dígitos numéricos e começar com 5');
+    }
+
     const existingEmail = await this.usersRepository.findByEmail(createProviderDto.email);
     if (existingEmail)
       throw new ConflictException('Email já está registrado');
@@ -70,7 +76,7 @@ export class UsersService {
     const { password, ...userWithoutPassword } = user;
     return { user: userWithoutPassword as User, access_token };
   }
-  
+
   async login(loginDto: LoginDto): Promise<{ user: User; access_token: string }> {
 
     const user = await this.usersRepository.findByEmail(loginDto.email);
