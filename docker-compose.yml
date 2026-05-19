@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: plataforma_reservas_db
+    environment:
+      POSTGRES_USER: ${DB_USER:-reservas}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-reservas123}
+      POSTGRES_DB: ${DB_NAME:-plataforma_reservas}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-reservas}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: plataforma_reservas_app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-reservas}:${DB_PASSWORD:-reservas123}@postgres:5432/${DB_NAME:-plataforma_reservas}?schema=public
+      NODE_ENV: development
+      JWT_SECRET: ${JWT_SECRET:-super_secret_jwt_key_change_in_production}
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run start:dev
+
+volumes:
+  postgres_data:

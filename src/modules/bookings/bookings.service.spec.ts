@@ -1,9 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import {
-  BadRequestException,
-  ForbiddenException,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, ForbiddenException, NotFoundException} from '@nestjs/common';
 import { BookingsService } from './bookings.service';
 import { BookingsRepository } from './bookings.repository';
 import { UsersService } from '../users/users.service';
