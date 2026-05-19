@@ -14,6 +14,7 @@ describe('UsersService', () => {
 
   const mockUsersRepository = {
     findByEmail: jest.fn(),
+    findByPhone: jest.fn(),
     findByNif: jest.fn(),
     findById: jest.fn(),
     findAll: jest.fn(),
@@ -113,6 +114,22 @@ describe('UsersService', () => {
       );
     });
 
+    it('deve lançar ConflictException se telefone já existir', async () => {
+      const createClientDto = {
+        fullName: 'Maria Santos',
+        phone: '923123456',
+        email: 'maria@gmail.com',
+        password: '123456',
+      };
+
+      mockUsersRepository.findByEmail.mockResolvedValue(null);
+      mockUsersRepository.findByPhone.mockResolvedValue(mockUser);
+
+      await expect(service.registerClient(createClientDto)).rejects.toThrow(
+        ConflictException,
+      );
+    });
+
     it('deve criar cliente com balance inicial 4000 KZ', async () => {
       const createClientDto = {
         fullName: 'Cliente Novo',
@@ -122,6 +139,7 @@ describe('UsersService', () => {
       };
 
       mockUsersRepository.findByEmail.mockResolvedValue(null);
+      mockUsersRepository.findByPhone.mockResolvedValue(null);
       (bcrypt.hash as jest.Mock).mockResolvedValue('hashed-password');
       mockUsersRepository.create.mockResolvedValue({ ...mockUser, balance: 4000 });
       mockJwtService.sign.mockReturnValue('jwt-token');
@@ -152,6 +170,7 @@ describe('UsersService', () => {
       };
 
       mockUsersRepository.findByEmail.mockResolvedValue(null);
+      mockUsersRepository.findByPhone.mockResolvedValue(null);
       mockUsersRepository.findByNif.mockResolvedValue(null);
       (bcrypt.hash as jest.Mock).mockResolvedValue('hashed-password');
       mockUsersRepository.create.mockResolvedValue(newProvider);
@@ -188,6 +207,23 @@ describe('UsersService', () => {
       };
 
       mockUsersRepository.findByEmail.mockResolvedValue(mockUser);
+
+      await expect(service.registerProvider(createProviderDto)).rejects.toThrow(
+        ConflictException,
+      );
+    });
+
+    it('deve lançar ConflictException se telefone já existir', async () => {
+      const createProviderDto = {
+        fullName: 'João Prestador',
+        phone: '923987654',
+        email: 'provider@gmail.com',
+        password: '123456',
+        nif: '5123456789',
+      };
+
+      mockUsersRepository.findByEmail.mockResolvedValue(null);
+      mockUsersRepository.findByPhone.mockResolvedValue(mockUser);
 
       await expect(service.registerProvider(createProviderDto)).rejects.toThrow(
         ConflictException,

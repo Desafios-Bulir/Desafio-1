@@ -16,6 +16,11 @@ export class UsersService {
       throw new ConflictException('Email já está registrado');
     }
 
+    const existingPhone = await this.usersRepository.findByPhone(createClientDto.phone);
+    if (existingPhone) {
+      throw new ConflictException('Telefone já está registrado');
+    }
+
     const hashedPassword = await bcrypt.hash(createClientDto.password, 10);
 
     const user = await this.usersRepository.create({
@@ -48,7 +53,10 @@ export class UsersService {
     const existingEmail = await this.usersRepository.findByEmail(createProviderDto.email);
     if (existingEmail)
       throw new ConflictException('Email já está registrado');
-    
+
+    const existingPhone = await this.usersRepository.findByPhone(createProviderDto.phone);
+    if (existingPhone)
+      throw new ConflictException('Telefone já está registrado');
 
     const existingNif = await this.usersRepository.findByNif(createProviderDto.nif);
     if (existingNif)

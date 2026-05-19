@@ -6,9 +6,6 @@ import { CreateUserDto, LoginDto, CreateClientDto, CreateProviderDto } from './d
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Post('register')
-  @HttpCode(HttpStatus.CREATED)
-
   @Post('register/client')
   @HttpCode(HttpStatus.CREATED)
   async registerClient( @Body() createClientDto: CreateClientDto ) {
