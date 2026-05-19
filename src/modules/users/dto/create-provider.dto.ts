@@ -12,6 +12,14 @@ export class CreateProviderDto {
   fullName: string;
 
   @ApiProperty({
+    description: 'Telefone do prestador',
+    example: '923123456',
+  })
+  @IsNotEmpty()
+  @IsString()
+  phone: string;
+
+  @ApiProperty({
     description:
       'NIF (Número de Identificação Fiscal) - 10 dígitos numéricos começando com 5 - Único no sistema',
     example: '5123456789',

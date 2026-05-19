@@ -20,6 +20,7 @@ export class UsersService {
 
     const user = await this.usersRepository.create({
       fullName: createClientDto.fullName,
+      phone: createClientDto.phone,
       email: createClientDto.email,
       password: hashedPassword,
       role: 'CLIENT',
@@ -58,6 +59,7 @@ export class UsersService {
 
     const user = await this.usersRepository.create({
       fullName: createProviderDto.fullName,
+      phone: createProviderDto.phone,
       email: createProviderDto.email,
       password: hashedPassword,
       nif: createProviderDto.nif,

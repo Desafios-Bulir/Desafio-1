@@ -11,6 +11,14 @@ export class CreateClientDto {
   fullName: string;
 
   @ApiProperty({
+    description: 'Telefone do cliente',
+    example: '923123456',
+  })
+  @IsNotEmpty()
+  @IsString()
+  phone: string;
+
+  @ApiProperty({
     description: 'Email do cliente - Único no sistema',
     example: 'gilsonchipombo@gmail.com',
   })

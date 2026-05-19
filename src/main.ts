@@ -32,7 +32,7 @@ async function bootstrap() {
     swaggerOptions: { persistAuthorization: true },
   });
 
-  const port = process.env.PORT ?? 3000;
+  const port = process.env.PORT ?? 4000;
   await app.listen(port);
 
   console.log(`\nAPI running on: http://localhost:${port}/api/v1`);

@@ -21,6 +21,7 @@ enum BookingStatus {
 model User {
   id          String   @id @default(uuid())
   fullName    String
+  phone       String   @unique
   nif         String?  @unique
   email       String   @unique
   password    String
@@ -30,7 +31,6 @@ model User {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  // RELATIONS
   services        Service[]
   bookings        Booking[]
   sentTransactions     Transaction[] @relation("SentTransactions")

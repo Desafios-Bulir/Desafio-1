@@ -27,6 +27,7 @@ describe('UsersService', () => {
   const mockUser = {
     id: '123e4567-e89b-12d3-a456-426614174000',
     fullName: 'Gilson Chipombo',
+    phone: '923123456',
     email: 'gilson@gmail.com',
     password: 'hashed-password',
     balance: 4000,
@@ -64,6 +65,7 @@ describe('UsersService', () => {
     it('deve registrar um cliente com sucesso', async () => {
       const createClientDto = {
         fullName: 'Maria Santos',
+        phone: '923123456',
         email: 'maria@gmail.com',
         password: '123456',
       };
@@ -84,6 +86,7 @@ describe('UsersService', () => {
       expect(result.user).toEqual({
         id: newUser.id,
         fullName: newUser.fullName,
+        phone: newUser.phone,
         email: newUser.email,
         balance: newUser.balance,
         role: 'CLIENT',
@@ -98,6 +101,7 @@ describe('UsersService', () => {
     it('deve lançar ConflictException se email já existir', async () => {
       const createClientDto = {
         fullName: 'Maria Santos',
+        phone: '923123456',
         email: 'existing@example.com',
         password: '123456',
       };
@@ -112,6 +116,7 @@ describe('UsersService', () => {
     it('deve criar cliente com balance inicial 4000 KZ', async () => {
       const createClientDto = {
         fullName: 'Cliente Novo',
+        phone: '923123456',
         email: 'bulir@gmail.com',
         password: '123456',
       };
@@ -131,6 +136,7 @@ describe('UsersService', () => {
     it('deve registrar um prestador com sucesso', async () => {
       const createProviderDto = {
         fullName: 'João Prestador',
+        phone: '923987654',
         email: 'provider@gmail.com',
         password: '123456',
         nif: '5123456789',
@@ -161,6 +167,7 @@ describe('UsersService', () => {
     it('deve lançar BadRequestException com NIF inválido', async () => {
       const createProviderDto = {
         fullName: 'João Prestador',
+        phone: '923987654',
         email: 'provider@gmail.com',
         password: '123456',
         nif: '1234567890', // NIF inválido (não começa com 5)
@@ -174,6 +181,7 @@ describe('UsersService', () => {
     it('deve lançar ConflictException se email já existir', async () => {
       const createProviderDto = {
         fullName: 'João Prestador',
+        phone: '923987654',
         email: 'existing@gmail.com',
         password: '123456',
         nif: '5123456789',
@@ -189,6 +197,7 @@ describe('UsersService', () => {
     it('deve lançar ConflictException se NIF já existir', async () => {
       const createProviderDto = {
         fullName: 'João Prestador',
+        phone: '923987654',
         email: 'new@gamail.com',
         password: '123456',
         nif: '5123456789',

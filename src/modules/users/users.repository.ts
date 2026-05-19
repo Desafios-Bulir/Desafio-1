@@ -4,6 +4,7 @@ import { User, UserRole } from '@prisma/client';
 
 export interface CreateUserData {
   fullName: string;
+  phone: string;
   email: string;
   password: string;
   role: UserRole;
@@ -38,6 +39,7 @@ export class UsersRepository {
     return this.prisma.user.create({
       data: {
         fullName: data.fullName,
+        phone: data.phone,
         nif: data.nif || null,
         email: data.email,
         password: data.password,
