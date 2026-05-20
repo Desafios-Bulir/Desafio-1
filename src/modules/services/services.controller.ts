@@ -59,8 +59,9 @@ export class ServicesController {
   @Delete(':id')
   @UseGuards(RolesGuard)
   @Roles('PROVIDER')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  async deleteService(@Param('id') id: string, @Request() req: any): Promise<void> {
+  @HttpCode(HttpStatus.OK)
+  async deleteService(@Param('id') id: string, @Request() req: any) {
     await this.servicesService.deleteService(id, req.user.id);
+    return { success: true, message: 'Serviço deletado com sucesso' };
   }
 }
