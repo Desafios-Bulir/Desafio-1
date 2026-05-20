@@ -1,6 +1,12 @@
-# Plataforma de Reservas
+# Bulir - Desafio 1: API Plataforma de Reservas
 
 Sistema de gestão de reservas construído com **NestJS**, **Prisma**, **PostgreSQL** e **JWT authentication**.
+
+## Screenshots
+
+### Documentação do Sweeger
+
+![Dashboard Screenshot](./screenshot/image.png)
 
 ## Funcionalidades
 
