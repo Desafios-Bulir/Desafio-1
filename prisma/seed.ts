@@ -17,10 +17,10 @@ async function main() {
   // ===== CLIENTES =====
   const client1 = await prisma.user.create({
     data: {
-      fullName: 'Maria Silva',
+      fullName: 'Gilson Chipombo',
       phone: '923123456',
-      email: 'bulor@gmail.com',
-      password: await bcrypt.hash('senha123', 10),
+      email: 'gilson@gmail.com',
+      password: await bcrypt.hash('123456', 10),
       role: UserRole.CLIENT,
       balance: 4000,
     },
@@ -28,10 +28,10 @@ async function main() {
 
   const client2 = await prisma.user.create({
     data: {
-      fullName: 'João Santos',
+      fullName: 'Sandra Bravo',
       phone: '923234567',
-      email: 'joao@gmail.com',
-      password: await bcrypt.hash('senha123', 10),
+      email: 'sandra@gmail.com',
+      password: await bcrypt.hash('123456', 10),
       role: UserRole.CLIENT,
       balance: 5500,
     },
@@ -39,10 +39,10 @@ async function main() {
 
   const client3 = await prisma.user.create({
     data: {
-      fullName: 'Ana Oliveira',
+      fullName: 'Diogo Chipombo',
       phone: '923345678',
-      email: 'ana@gmail.com',
-      password: await bcrypt.hash('senha123', 10),
+      email: 'diogo@gmail.com',
+      password: await bcrypt.hash('123456', 10),
       role: UserRole.CLIENT,
       balance: 3200,
     },
@@ -53,11 +53,11 @@ async function main() {
   // ===== PRESTADORES =====
   const provider1 = await prisma.user.create({
     data: {
-      fullName: 'Gilson Chipombo',
+      fullName: 'Bulir Empresa',
       phone: '923456789',
       nif: '5123456789',
-      email: 'gilson.provider@gmail.com',
-      password: await bcrypt.hash('senha123', 10),
+      email: 'bulir@gmail.com',
+      password: await bcrypt.hash('123456', 10),
       role: UserRole.PROVIDER,
       balance: 0,
     },
@@ -69,7 +69,7 @@ async function main() {
       phone: '923567890',
       nif: '5234567890',
       email: 'pedro.barbeiro@gmail.com',
-      password: await bcrypt.hash('senha123', 10),
+      password: await bcrypt.hash('123456', 10),
       role: UserRole.PROVIDER,
       balance: 0,
     },
@@ -81,7 +81,7 @@ async function main() {
       phone: '923678901',
       nif: '5345678901',
       email: 'carlos.encanador@gmail.com',
-      password: await bcrypt.hash('senha123', 10),
+      password: await bcrypt.hash('123456', 10),
       role: UserRole.PROVIDER,
       balance: 0,
     },
